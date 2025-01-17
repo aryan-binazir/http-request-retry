@@ -20,7 +20,10 @@ func main() {
 
 	fmt.Println("Initial commit")
 	collection := client.Database("test").Collection("test")
-	collection.InsertOne(context.Background(), map[string]string{"name": "abc"})
+	_, err = collection.InsertOne(context.Background(), map[string]string{"name": "abc"})
+	if err != nil {
+		log.Printf("Error: %v", err)
+	}
 	defer client.Disconnect(context.Background())
 	wg.Wait()
 }
