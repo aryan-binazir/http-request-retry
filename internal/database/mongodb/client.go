@@ -11,7 +11,9 @@ import (
 	"os"
 )
 
-func GetClient() (*mongo.Client, error) {
+var Client *mongo.Client
+
+func CreateConnection() error {
 	var uri string
 	err := godotenv.Load()
 	if err != nil {
@@ -37,5 +39,6 @@ func GetClient() (*mongo.Client, error) {
 		panic(err)
 	}
 	fmt.Println("Pinged your deployment. You successfully connected to MongoDB!")
-	return client, nil
+	Client = client
+	return nil
 }
