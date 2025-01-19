@@ -31,14 +31,28 @@ func CreateConnection() error {
 	// Create a new client and connect to the server
 	client, err := mongo.Connect(opts)
 	if err != nil {
-		panic(err)
+		fmt.Println(err)
+		return err
 	}
 
 	var result bson.M
+
 	if err := client.Database("admin").RunCommand(context.TODO(), bson.D{{"ping", 1}}).Decode(&result); err != nil {
-		panic(err)
+		fmt.Println(err)
+		return err
 	}
+
 	fmt.Println("Pinged your deployment. You successfully connected to MongoDB!")
 	Client = client
 	return nil
+}
+
+// GetClient returns the MongoDB client instance
+func GetClient() *mongo.Client {
+	if Client == nil {
+		if err := CreateConnection(); err != nil {
+			fmt.Errorf("Error creating connection: %v", err)
+		}
+	}
+	return Client
 }
