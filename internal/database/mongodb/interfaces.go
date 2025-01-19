@@ -20,44 +20,32 @@ func getDbName() string {
 	return dbName
 }
 
-// QueryOptions represents optional parameters for database operations
 type QueryOptions struct {
 	Limit *int64
 	Sort  interface{}
 	Skip  *int64
 }
 
-// DatabaseOperations interface defines common database operations
 type DatabaseOperations interface {
-	// InsertOne inserts a single document into the collection
 	InsertOne(ctx context.Context, collection string, document interface{}) (*mongo.InsertOneResult, error)
 
-	// InsertMany inserts multiple documents into the collection
 	InsertMany(ctx context.Context, collection string, documents []interface{}) (*mongo.InsertManyResult, error)
 
-	// FindOne finds a single document matching the filter
 	FindOne(ctx context.Context, collection string, filter interface{}, result interface{}, opts *QueryOptions) error
 
-	// Find finds all documents matching the filter
 	Find(ctx context.Context, collection string, filter interface{}, results interface{}, opts *QueryOptions) error
 
-	// UpdateOne updates a single document matching the filter
 	UpdateOne(ctx context.Context, collection string, filter interface{}, update interface{}) (*mongo.UpdateResult, error)
 
-	// UpdateMany updates all documents matching the filter
 	UpdateMany(ctx context.Context, collection string, filter interface{}, update interface{}) (*mongo.UpdateResult, error)
 
-	// DeleteOne deletes a single document matching the filter
 	DeleteOne(ctx context.Context, collection string, filter interface{}) (*mongo.DeleteResult, error)
 
-	// DeleteMany deletes all documents matching the filter
 	DeleteMany(ctx context.Context, collection string, filter interface{}) (*mongo.DeleteResult, error)
 }
 
-// MongoOperations implements DatabaseOperations interface
 type MongoOperations struct{}
 
-// NewMongoOperations creates a new MongoOperations instance
 func NewMongoOperations() DatabaseOperations {
 	return &MongoOperations{}
 }

@@ -25,10 +25,8 @@ func CreateConnection() error {
 	}
 	fmt.Println("Connecting to MongoDB...")
 
-	// Use the SetServerAPIOptions() method to set the Stable API version to 1
 	serverAPI := options.ServerAPI(options.ServerAPIVersion1)
 	opts := options.Client().ApplyURI(uri).SetServerAPIOptions(serverAPI)
-	// Create a new client and connect to the server
 	client, err := mongo.Connect(opts)
 	if err != nil {
 		fmt.Println(err)
@@ -47,7 +45,6 @@ func CreateConnection() error {
 	return nil
 }
 
-// GetClient returns the MongoDB client instance
 func GetClient() *mongo.Client {
 	if Client == nil {
 		if err := CreateConnection(); err != nil {
