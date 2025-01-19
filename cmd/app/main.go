@@ -23,12 +23,12 @@ func main() {
 			}()
 			wg.Wait()
 			time.Sleep(2 * time.Second)
-
 		}
 
 	}
 
-	go startService("Database Service", mongodb.CreateConnection(), &wg)
+	mongodb.CreateConnection()
 	go startService("Retry Service", retrymechanism.Init, &wg)
+	print(mongodb.GetDb())
 	select {}
 }
