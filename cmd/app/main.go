@@ -5,7 +5,7 @@ import (
 	"sync"
 	"time"
 
-	// "github.com/aryan-binazir/http-request-retry/v2/internal/database/mongodb"
+	"github.com/aryan-binazir/http-request-retry/v2/internal/database/mongodb"
 	"github.com/aryan-binazir/http-request-retry/v2/internal/retryMechanism"
 )
 
@@ -28,7 +28,7 @@ func main() {
 
 	}
 
-	// go startService("Database Service", mongodb.CreateConnection(), &wg)
+	go startService("Database Service", mongodb.CreateConnection(), &wg)
 	go startService("Retry Service", retrymechanism.Init, &wg)
 	select {}
 }
