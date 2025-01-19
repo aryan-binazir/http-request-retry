@@ -19,10 +19,11 @@ func Init() error {
 }
 
 func writeToDB() {
-	client := mongodb.GetDb()
-	collection := client.Database("test").Collection("test")
+	// client := mongodb.GetDb()
+	// collection := client.Database("test").Collection("test")
 
-	_, err := collection.InsertOne(context.TODO(), bson.M{"timestamp": time.Now(), "message": "executed"})
+	// _, err := collection.InsertOne(context.TODO(), bson.M{"timestamp": time.Now(), "message": "executed"})
+	_, err := mongodb.NewMongoOperations().InsertOne(context.TODO(), "test", bson.M{"timestamp": time.Now(), "message": "executed"})
 	if err != nil {
 		log.Printf("Error inserting document: %v", err)
 		return

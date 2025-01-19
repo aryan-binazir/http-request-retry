@@ -29,6 +29,5 @@ func main() {
 
 	mongodb.CreateConnection()
 	go startService("Retry Service", retrymechanism.Init, &wg)
-	print(mongodb.GetDb())
 	select {}
 }

@@ -47,7 +47,8 @@ func CreateConnection() error {
 	return nil
 }
 
-func GetDb() *mongo.Client {
+// GetClient returns the MongoDB client instance
+func GetClient() *mongo.Client {
 	if Client == nil {
 		if err := CreateConnection(); err != nil {
 			fmt.Errorf("Error creating connection: %v", err)
